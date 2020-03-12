@@ -6,8 +6,6 @@ services:
       - ./bluestone-app:/usr/src/service
     working_dir: /usr/src/service
     command: bash -c "npm install && npm start"
-    ports:
-      - 3000:3000
   db:
     image: postgres
     restart: always
@@ -16,5 +14,8 @@ services:
   nginx:
     image: nginx:alpine
     restart: always
+  proxy:
+    build: ./nginx
     ports:
-      - 80:80
+      - 8080:8080
+    restart: always
